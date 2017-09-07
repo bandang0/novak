@@ -1,4 +1,4 @@
 # Ignore compiled files
 */*.o
-*/main
-
+TP1/main
+TP2/ratio
