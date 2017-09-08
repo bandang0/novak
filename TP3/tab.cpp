@@ -38,7 +38,7 @@ Tab::Tab(int sX_arg, int sY_arg, int sZ_arg):
 
 /* Read file */
 Tab::Tab(char* file_name):
-  dim(1), sX(1), sY(2), sZ(3), val(NULL) {
+  dim(1), sX(1), sY(1), sZ(1), val(NULL) {
   int dim, sX, sY, sZ;
   ifstream file(file_name);
   file >> dim >> sX >> sY >> sZ;
@@ -46,6 +46,7 @@ Tab::Tab(char* file_name):
     for (int i = 0; i < sX * sY * sZ; i++){
       file >> *(ans.val + i);
     }
+  return ans;
 }
 
 /* Sets */
