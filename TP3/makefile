@@ -2,7 +2,7 @@ SHELL=/bin/bash
 
 .SUFFIXES : .o .cpp
 
-EXE = tab
+EXE = principal
 SRC = principal.cpp tab.cpp tab_math.cpp 
 OBJ = $(SRC:.cpp=.o)
 

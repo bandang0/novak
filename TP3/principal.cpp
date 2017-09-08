@@ -2,6 +2,9 @@
 #include <cmath>
 #include <iostream>
 #include "tab.h"
+#include "tab_math.h"
+
+using namespace std;
 
 int main() {
   Tab tab3d(2, 3, 4) ;
