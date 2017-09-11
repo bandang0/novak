@@ -14,4 +14,3 @@ $(EXE): $(OBJ)
 
 clean:
 	rm -rf *.o
-	rm -rf main

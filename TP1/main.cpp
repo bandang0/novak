@@ -22,5 +22,7 @@ int main(void) {
     cout << "At " << tab + i << ": " << *(tab + i) << endl;
   }
 
+  delete[] tab;
+
   return 0;
 }

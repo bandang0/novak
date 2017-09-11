@@ -12,5 +12,5 @@ $(EXE): $(OBJ)
 .cpp.o:
 	g++ -c -Wall -g $<
 
-
-
+clean:
+	rm -rf *.o
