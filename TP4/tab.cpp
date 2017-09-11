@@ -10,8 +10,7 @@ Tab::~Tab(){
 }
 
 /* Copy */
-Tab::Tab(const Tab& tab):
-  dim(tab.dim), sX(tab.sX), sY(tab.sY), sZ(tab.sZ), val(NULL) {
+Tab::Tab(const Tab& tab): sX(tab.sX), sY(tab.sY), sZ(tab.sZ), val(NULL) {
     val = new double[sX * sY * sZ];
     for (int i = 0; i < sX * sY * sZ; i++){
       *(val + i) = tab.val[i];
@@ -20,28 +19,23 @@ Tab::Tab(const Tab& tab):
 
 /* Default */
 Tab::Tab(int sX_arg, int sY_arg, int sZ_arg):
-  dim(1), sX(sX_arg), sY(sY_arg), sZ(sZ_arg), val(NULL) {
+  sX(sX_arg), sY(sY_arg), sZ(sZ_arg), val(NULL) {
 
     if (sY_arg == 0 && sZ_arg == 0){
-      dim = 1;
       sY = 1;
       sZ = 1;
     } else if (sY_arg != 0 and sZ_arg == 0){
-      dim = 2;
       sZ = 1;
-    } else {
-      dim = 3;
     }
 
     val = new double[sX * sY * sZ];
 }
 
 /* Read file */
-Tab::Tab(char* file_name):
-  dim(1), sX(1), sY(1), sZ(1), val(NULL) {
+Tab::Tab(const char* file_name): sX(1), sY(1), sZ(1), val(NULL) {
 
   ifstream file(file_name);
-  file >> dim >> sX >> sY >> sZ;
+  file >> sX >> sY >> sZ;
   val = new double[sX * sY * sZ];
     for (int i = 0; i < sX * sY * sZ; i++){
       file >> *(val + i);
@@ -58,7 +52,7 @@ void Tab::operator=(double value){
 }
 
 void Tab::operator=(const Tab& tab){
-  if (dim != tab.dim || sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
+  if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
     cout << "Dimensions to not match, affectation aborted";
   }
   for (int i = 0; i < sX * sY * sZ; i++){
@@ -116,16 +110,16 @@ double Tab::get_max() const {
 }
 
 /* Output */
-void Tab::sauve(char* name) const {
+void Tab::sauve(const char* name) const {
   ofstream file(name);
-  file << dim << ' ' << sX << ' ' << sY << ' ' << sZ << ' ';
+  file << sX << ' ' << sY << ' ' << sZ << ' ';
   for (int i = 0; i < sX * sY * sZ; i++){
     file << *(val + i) << ' ';
   }
 }
 
 ostream& operator<<(ostream& o, const Tab& tab){
-  o << tab.dim << ' ' << tab.sX << ' ' << tab.sY << ' ' << tab.sZ << "\n";
+  o << tab.sX << ' ' << tab.sY << ' ' << tab.sZ << "\n";
   for (int i = 0; i < tab.sX * tab.sY * tab.sZ; i++){
     o << *(tab.val + i) << ' ';
   }

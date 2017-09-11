@@ -10,6 +10,13 @@ Tab sin(const Tab& tab){
   return ans;
 }
 
+Tab abs(const Tab& tab){
+  Tab ans(tab);
+  for (int i = 0; i < ans.sX * ans.sY * ans.sZ; i++){
+    *(ans.val + i) = abs(*(ans.val + i));
+  }
+  return ans;
+}
 double max(const Tab& tab){
   return tab.get_max();
 }

@@ -12,5 +12,5 @@ $(EXE): $(OBJ)
 .cpp.o:
 	g++ -c -Wall -g -I/usr/include/g++  $<
 
-
-
+clean:
+	rm *.o

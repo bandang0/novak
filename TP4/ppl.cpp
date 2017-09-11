@@ -1,6 +1,9 @@
 #include <cstdlib>
 #include <iostream>
 #include "matrice.h"
+#include "tab_math.h"
+
+using namespace std;
 
 int main() {
 

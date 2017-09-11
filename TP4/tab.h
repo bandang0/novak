@@ -3,13 +3,10 @@
 
 #include <iostream>
 
-using namespace std;
-
 class Tab {
 
   protected:
     /* Data */
-    int dim;
     int sX, sY, sZ;
     double* val;
 
@@ -19,7 +16,7 @@ class Tab {
     /* Constructors */
     Tab(const Tab&); /* Copy */
     Tab(int sX_arg, int sY_arg = 0, int sZ_arg = 0); /* Default */
-    Tab(char*); /* Read file */
+    Tab(const char*); /* Read file */
 
     /* Sets */
     double& set(int i, int j = 0, int k = 0);
@@ -31,7 +28,7 @@ class Tab {
     Tab operator+(const Tab&) const;
     Tab operator+(double) const;
     Tab operator-(const Tab&) const;
-    Tab operator*(const Tab&) const;
+    virtual Tab operator*(const Tab&) const;
 
     /* Gets */
     int get_taille1() const {return sX;};
@@ -42,11 +39,13 @@ class Tab {
     double get_max() const;
 
     /* Output */
-    void sauve(char*) const;  /* Write to file */
-    friend ostream& operator<<(ostream&, const Tab&); /* Stdout */
+    void sauve(const char*) const;  /* Write to file */
+    friend std::ostream& operator<<(std::ostream&, const Tab&); /* Stdout */
 
     /* Math */
     friend Tab sin(const Tab&);
+
+    friend class Matrice;
 };
 
 #endif
