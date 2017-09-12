@@ -19,7 +19,7 @@ class Tab {
     Tab(const char*); /* Read file */
 
     /* Sets */
-    double& set(int i, int j = 0, int k = 0);
+    double& set(int i, int j = 0, int k = 0) const;
     void operator=(double);
     void operator=(const Tab&);
 
@@ -44,6 +44,7 @@ class Tab {
 
     /* Math */
     friend Tab sin(const Tab&);
+    friend Tab abs(const Tab&);
 
     friend class Matrice;
 };

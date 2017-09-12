@@ -1,5 +1,8 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
+#include <cassert>
+
 #include "tab.h"
 
 using namespace std;
@@ -43,7 +46,10 @@ Tab::Tab(const char* file_name): sX(1), sY(1), sZ(1), val(NULL) {
 }
 
 /* Sets */
-double& Tab::set(int i, int j, int k){
+double& Tab::set(int i, int j, int k) const{
+  assert(i < sX);
+  assert(j < sY);
+  assert(k < sZ);
   return val[i + sX * j + sX * sY * k];
 }
 
@@ -53,7 +59,7 @@ void Tab::operator=(double value){
 
 void Tab::operator=(const Tab& tab){
   if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
-    cout << "Dimensions to not match, affectation aborted";
+    throw "Dimensions to not match, assignement aborted";
   }
   for (int i = 0; i < sX * sY * sZ; i++){
     *(val + i) = tab.val[i];
@@ -62,6 +68,9 @@ void Tab::operator=(const Tab& tab){
 
 /* Arithmetic */
 Tab Tab::operator/(const Tab& tab) const {
+  if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
+    throw "Dimensions to not match, / operation aborted";
+  }
   Tab ans(*this);
   for (int i = 0; i < sX * sY * sZ; i++){
     *(ans.val + i) /= tab.val[i];
@@ -70,6 +79,9 @@ Tab Tab::operator/(const Tab& tab) const {
 }
 
 Tab Tab::operator+(const Tab& tab) const {
+  if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
+    throw "Dimensions to not match, + operation aborted";
+  }
   Tab ans(*this);
   for (int i = 0; i < sX * sY * sZ; i++){
     *(ans.val + i) += tab.val[i];
@@ -85,6 +97,9 @@ Tab Tab::operator+(double k) const {
   return ans;
 }
 Tab Tab::operator-(const Tab& tab) const {
+  if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
+    throw "Dimensions to not match, - operation aborted";
+  }
   Tab ans(*this);
   for (int i = 0; i < sX * sY * sZ; i++){
     *(ans.val + i) -= tab.val[i];
@@ -93,6 +108,9 @@ Tab Tab::operator-(const Tab& tab) const {
 }
 
 Tab Tab::operator*(const Tab& tab) const {
+  if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
+    throw "Dimensions to not match, * operation aborted";
+  }
   Tab ans(*this);
   for (int i = 0; i < sX * sY * sZ; i++){
     *(ans.val + i) *= tab.val[i];
@@ -119,9 +137,16 @@ void Tab::sauve(const char* name) const {
 }
 
 ostream& operator<<(ostream& o, const Tab& tab){
-  o << tab.sX << ' ' << tab.sY << ' ' << tab.sZ << "\n";
-  for (int i = 0; i < tab.sX * tab.sY * tab.sZ; i++){
-    o << *(tab.val + i) << ' ';
+  o << "Sizes: " << tab.sX << ", " << tab.sY << ", " << tab.sZ << "\n";
+  for (int k = 0; k < tab.sZ; k++){
+    o << "-------\n";
+    for (int i = 0; i < tab.sX; i++){
+      for (int j = 0; j < tab.sY; j++){
+        o << setw(10) << tab.set(i, j, k) << ' ';
+      }
+      o << '\n';
+    }
   }
+  o << endl;
   return o;
 }

@@ -4,6 +4,5 @@
 #include "tab.h"
 
 double max(const Tab&);
-Tab abs(const Tab&);
 
 #endif

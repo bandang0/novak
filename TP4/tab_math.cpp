@@ -1,4 +1,5 @@
 #include <cmath>
+
 #include "tab.h"
 #include "tab_math.h"
 
@@ -13,7 +14,7 @@ Tab sin(const Tab& tab){
 Tab abs(const Tab& tab){
   Tab ans(tab);
   for (int i = 0; i < ans.sX * ans.sY * ans.sZ; i++){
-    *(ans.val + i) = abs(*(ans.val + i));
+    *(ans.val + i) = fabs(*(ans.val + i));
   }
   return ans;
 }
