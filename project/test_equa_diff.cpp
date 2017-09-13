@@ -27,11 +27,11 @@ int main() {
     int ndessin = 1000 ;
     double err = -1. ;
     for (int i=0; i<ndessin; i++) {
-	double t = 2*double(i)/double(ndessin-1) - 1.;
-	double diff = sol.calcule_en_x(t) - exp(t)*(1+atan(t)) ;
-	if (fabs(diff) > err)
-	    err = fabs(diff) ;
-	sortie << t << '\t' <<  diff << endl ;
+	    double t = 2*double(i)/double(ndessin-1) - 1.;
+	    double diff = sol.calcule_en_x(t) - exp(t)*(1+atan(t)) ;
+	    if (fabs(diff) > err)
+	      err = fabs(diff) ;
+	    sortie << t << '\t' <<  diff << endl ;
     }
     cout << "Equa_un : Erreur maximum sur la resolution: " << err << endl ;
     system("xmgrace dessin.dat") ;
@@ -44,12 +44,13 @@ int main() {
     ofstream sortie2("dessin2.dat") ;
     err = -1. ;
     for (int i=0; i<ndessin; i++) {
-	double t = 2*double(i)/double(ndessin-1) - 1.;
-	double diff = sol2.calcule_en_x(t) - exp(-0.5*t)*cos(0.5*sqrt(3.)*t);
-	if (fabs(diff) > err)
-	    err = fabs(diff) ;
-	sortie2 << t << '\t' <<  diff << endl ;
+	    double t = 2*double(i)/double(ndessin-1) - 1.;
+	    double diff = sol2.calcule_en_x(t) - exp(-0.5*t)*cos(0.5*sqrt(3.)*t);
+	    if (fabs(diff) > err)
+	      err = fabs(diff) ;
+	  sortie2 << t << '\t' <<  diff << endl ;
     }
+
     cout << "Equa_deux : Erreur maximum sur la resolution: " << err << endl ;
     system("xmgrace dessin2.dat") ;
 
