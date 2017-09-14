@@ -34,7 +34,7 @@ class Tab {
     /* Gets */
     int get_taille1() const {return sX;};
     int get_taille2() const {return sY;};
-    double operator()(int i, int j = 0, int k = 0) {
+    double operator()(int i, int j = 0, int k = 0) const {
       return val[i + sX * j + sX * sY * k];
     };
     double get_max() const;

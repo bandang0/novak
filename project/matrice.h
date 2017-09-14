@@ -24,4 +24,16 @@ class Matrice: public Tab {
     Tab operator*(const Tab&) const;
     Matrice operator*(const Matrice&) const;
 };
+
+/* Fortran interface */
+extern "C" {
+  void dgeev_(char* jobvl, char* jobvr, int* n, double* a, int* lda,
+              double* wr, double* wi, double* vl, int* ldvl, double* vr,
+              int* ldvr, double* work, int* lwork, int* info);
+
+  void dgetrf_(int*, int*, double*, int*, int*, int*);
+	void dgetrs_( char*, int*, int*, double*, int*,
+                int*, double*, int*, int*);
+}
+
 #endif

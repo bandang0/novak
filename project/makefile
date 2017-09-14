@@ -2,8 +2,8 @@ SHELL=/bin/sh
 
 .SUFFIXES : .o .cpp
 
-EXE = test_matrice
-SRC = test_matrice.cpp tab.cpp tab_math.cpp matrice.cpp
+EXE = test_fonction
+SRC = test_fonction.cpp tab.cpp maths.cpp matrice.cpp fonc.cpp
 OBJ = $(SRC:.cpp=.o)
 
 $(EXE): $(OBJ)

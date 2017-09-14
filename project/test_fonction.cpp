@@ -3,17 +3,19 @@
 #include <fstream>
 #include "fonc.h"
 
+using namespace std;
+
 int main() {
 
     int np = 10 ;
     cout << "Entrer le nombre de points: " << endl ;
     cin >> np ;
     Fonction fi(np) ;
-    Fonction x(fi.grille()) ;
+    Tab x(fi.grille()) ;
     
     fi = exp(-x*x) ;
     fi.calcule_coef() ;
-    fi.sauve("fi.dat") ;
+    //fi.sauve("fi.dat") ;
 
     ofstream sortie("dessin.dat") ;
     int ndessin = 1000 ;
@@ -28,7 +30,7 @@ int main() {
     cout << "Erreur maximum sur l'interpolation: " << err << endl ;
     system("xmgrace dessin.dat") ;
 
-    Tab cc(np) ;
+    /*Tab cc(np) ;
     cc = 0 ;
     cc.set(2) = 1 ; 
     Fonction g(np) ;
@@ -47,7 +49,7 @@ int main() {
 	der << t << '\t' <<  diff << endl ;
     }
     cout << "Erreur maximum sur la derivee: " << err << endl ;
-    system("xmgrace derivee.dat") ;
+    system("xmgrace derivee.dat") ;*/
 
   return EXIT_SUCCESS ; 
 }

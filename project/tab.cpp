@@ -113,6 +113,9 @@ Tab Tab::operator-() const {
   for (int i = 0; i < sX * sY * sZ; i++){
     *(ans.val + i) = -ans.val[i];
   }
+  return ans;
+}
+
 Tab Tab::operator*(const Tab& tab) const {
   if (sX != tab.sX || sY != tab.sY || sZ != tab.sZ){
     throw "Dimensions to not match, * operation aborted";

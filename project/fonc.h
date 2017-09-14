@@ -2,13 +2,21 @@
 #define FONC
 
 #include <iostream>
+#include <vector>
 
 #include "tab.h"
+#include "matrice.h"
 
 class Fonction {
   protected:
+    /* Statics */
+    static std::vector<int> orders;
+    static std::vector<Matrice> Ps;
+    static std::vector<Tab> Xs;
+
+    Matrice* P; /* These point to elements in the static members */
+    Tab* X;
     int n;
-    Tab X;
     Tab Phi;
     Tab C;
 
@@ -23,20 +31,20 @@ class Fonction {
     void operator=(double x) {Phi = x;};
 
     /* Gets */  
-    Tab grille() const {return X;};
+    Tab grille() const {return *X;};
 
     /* Sets */
     void set_coef(const Tab& tab){C = tab;};
-    void calcule_coef();
+    void calcule_coef(){ C = (*P)*(Phi);};
     double calcule_en_x(double) const;
-    double operator(double x0)(double) const {return calcule_en_x(x0);};
+    double operator()(double x0) const {return calcule_en_x(x0);};
 
     /* Arithmetic */
     Fonction derivee() const;
 
     /* Output */
-    friend ostream& operator<<(ostream& o, const Fonction&);
+    friend std::ostream& operator<<(std::ostream& o, const Fonction&);
     void sauve(const char*) const;
-}
+};
 
 #endif

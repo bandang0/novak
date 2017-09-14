@@ -16,17 +16,6 @@ Matrice::Matrice(const char* name): Tab(name) {}
 void Matrice::operator=(double value) {Tab::operator=(value);}
 void Matrice::operator=(const Tab& arg) {Tab::operator=(arg);}
 
-/* Fortran interface */
-extern "C" {
-  void dgeev_(char* jobvl, char* jobvr, int* n, double* a, int* lda,
-              double* wr, double* wi, double* vl, int* ldvl, double* vr,
-              int* ldvr, double* work, int* lwork, int* info);
-
-  void dgetrf_(int*, int*, double*, int*, int*, int*);
-	void dgetrs_( char*, int*, int*, double*, int*,
-                int*, double*, int*, int*);
-}
-
 /* Math */
 double Matrice::determinant() const {
   double ans = 1;
@@ -102,7 +91,7 @@ Tab Matrice::operator*(const Tab& vec) const {
   Tab ans(sX);
   for (int i = 0; i < sX; i++)
     for (int j = 0; j < sX; j++)
-      ans.set(i) += set(i, j) * vec.set(j);
+      ans.set(i) += (*this)(i, j) * vec(j);
 
   return ans;
 }
@@ -113,7 +102,7 @@ Matrice Matrice::operator*(const Matrice& arg) const {
   for (int i = 0; i < sX; i++)
     for (int j = 0; j < sX; j++)
       for (int k = 0; k < sX; k++)
-        ans.set(i, j) += set(i, k) * arg.set(k, j);
+        ans.set(i, j) += (*this)(i, k) * arg(k, j);
 
   return ans;
 }
