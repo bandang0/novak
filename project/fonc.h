@@ -9,13 +9,8 @@
 
 class Fonction {
   protected:
-    /* Statics */
-    static std::vector<int> orders;
-    static std::vector<Matrice> Ps;
-    static std::vector<Tab> Xs;
-
-    Matrice* P; /* These point to elements in the static members */
-    Tab* X;
+    Matrice P;
+    Tab X;
     int n;
     Tab Phi;
     Tab C;
@@ -31,11 +26,11 @@ class Fonction {
     void operator=(double x) {Phi = x;};
 
     /* Gets */  
-    Tab grille() const {return *X;};
+    Tab grille() const {return X;};
 
     /* Sets */
     void set_coef(const Tab& tab){C = tab;};
-    void calcule_coef(){ C = (*P)*(Phi);};
+    void calcule_coef(){ C = P * Phi;};
     double calcule_en_x(double) const;
     double operator()(double x0) const {return calcule_en_x(x0);};
 

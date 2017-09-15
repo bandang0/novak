@@ -1,6 +1,4 @@
 #include <cassert>
-#include <vector>
-#include <algorithm>
 
 #include "tab.h"
 #include "fonc.h"
@@ -16,29 +14,13 @@ Fonction::Fonction(const Fonction& arg):
 
 /* Constructors */
 Fonction::Fonction(int m):
-  P(NULL), X(NULL), n(m), Phi(Tab(m + 1)), C(Tab(m + 1)) {
-  int index = 0;
-  int len = orders.size();
-  for( ; index < len + 1; index++){
-    if(orders[index]){ break;}
-  }
-
-  if (index == len) {
-    Fonction::orders.push_back(m);
-    Fonction::Ps.push_back(passage(n));
-    Fonction::Xs.push_back(_grille(n));
-  }
-  P = &Fonction::Ps[index];
-  X = &Fonction::Xs[index];
+  P(passage(m)), X(_grille(m)), n(m), Phi(Tab(m + 1)), C(Tab(m + 1)) {
 }
-  
 
 Fonction::Fonction(const Tab& arg):
-  P(NULL), X(NULL), n(arg.get_taille1() - 1),
-  Phi(Tab(arg.get_taille1())), C(Tab(arg.get_taille1())) {
-    Fonction tmp(arg.get_taille1() + 1);
-    *this = tmp;
-    Phi = arg;
+  P(passage(arg.get_taille1() - 1)), X(_grille(arg.get_taille1())),
+  n(arg.get_taille1() - 1),
+  Phi(arg), C(Tab(arg.get_taille1())) {
 }
 
 /* Assignment */

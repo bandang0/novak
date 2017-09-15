@@ -21,8 +21,8 @@ class Matrice: public Tab {
     Tab resout(const Tab&) const;
 
     /* Arithmetic */
-    Tab operator*(const Tab&) const;
-    Matrice operator*(const Matrice&) const;
+    virtual Tab operator*(const Tab&) const;
+    virtual Matrice operator*(const Matrice&) const;
 };
 
 /* Fortran interface */

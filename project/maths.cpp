@@ -48,26 +48,29 @@ Tab _grille(int n) {
 
 Matrice passage(int n) {
   Matrice ans(n + 1);
-  double* w = new double[n + 1];
-  double* gamma = new double[n + 1];
+  Tab w(n + 1);
+  Tab gamma(n + 1); 
   Tab X = _grille(n);
+
+  w = 0.;
+  gamma = 0.;
 
   int i;
   int k;
 
-  w[0] = M_PI / (2 * n);
-  w[n] = M_PI / (2 * n);
-  for (k = 1; k < n; k ++) {w[k] = k * M_PI / n;}
+  w.set(0) = M_PI / (2 * n);
+  w.set(n) = M_PI / (2 * n);
+  for (k = 1; k < n; k++) {w.set(k) = k * M_PI / n;}
 
   for (i = 0; i < n + 1; i++){
     for (k = 0; k < n + 1; k++){
-      gamma[i] += pow(tcheb(i, X(k)), 2) * w[k];
+      gamma.set(i) += pow(tcheb(i, X(k)), 2) * w(k);
     }
   }
 
   for (i = 0; i < n + 1; i++){
-    for (k = 0; k < n + 1; k ++){
-      ans.set(i, k) = tcheb(i, X(k)) * w[k] / gamma[i];
+    for (k = 0; k < n + 1; k++){
+      ans.set(i, k) = tcheb(i, X(k)) * w(k) / gamma(i);
     }
   }
   return ans;

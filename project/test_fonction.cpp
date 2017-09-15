@@ -21,14 +21,14 @@ int main() {
     int ndessin = 1000 ;
     double err = -1. ;
     for (int i=0; i<ndessin; i++) {
-	double t = 2*double(i)/double(ndessin-1) - 1.;
-	double diff = fi.calcule_en_x(t) - exp(-t*t) ;
-	if (fabs(diff) > err)
-	    err = fabs(diff) ;
-	sortie << t << '\t' <<  diff << endl ;
+	    double t = 2*double(i)/double(ndessin-1) - 1.;
+	    double diff = fi.calcule_en_x(t) - exp(-t*t) ;
+	    if (fabs(diff) > err)
+	      err = fabs(diff) ;
+	    sortie << t << '\t' <<  fi.calcule_en_x(t) << endl ;
     }
     cout << "Erreur maximum sur l'interpolation: " << err << endl ;
-    system("xmgrace dessin.dat") ;
+    system("xmgrace dessin.dat &") ;
 
     /*Tab cc(np) ;
     cc = 0 ;

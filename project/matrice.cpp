@@ -73,7 +73,7 @@ Tab Matrice::resout(const Tab& Y) const {
 	int info = 0;
 	int col = 1;
 	int info2 = 0;
-	char a = 'N';
+	char a = 'T';
 	int taille = mat.sX;
 	dgetrf_(&taille, &taille, mat.val, &taille, vec, &info);
 	dgetrs_(&a, &taille, &col, mat.val, &taille, vec, sol.val, &taille, &info2);
@@ -89,9 +89,10 @@ Tab Matrice::resout(const Tab& Y) const {
 Tab Matrice::operator*(const Tab& vec) const {
   assert(vec.sX == sX && vec.sY == 1 && vec.sZ == 1);
   Tab ans(sX);
+  ans = 0.;
   for (int i = 0; i < sX; i++)
     for (int j = 0; j < sX; j++)
-      ans.set(i) += (*this)(i, j) * vec(j);
+      ans.set(i) += (*this)(j, i) * vec(j);
 
   return ans;
 }
@@ -99,10 +100,11 @@ Tab Matrice::operator*(const Tab& vec) const {
 Matrice Matrice::operator*(const Matrice& arg) const {
   assert(sX == arg.sY && sY == arg.sX);
   Matrice ans(sX);
+  ans = 0.;
   for (int i = 0; i < sX; i++)
     for (int j = 0; j < sX; j++)
       for (int k = 0; k < sX; k++)
-        ans.set(i, j) += (*this)(i, k) * arg(k, j);
+        ans.set(i, j) += (*this)(k, i) * arg(j, k);
 
   return ans;
 }

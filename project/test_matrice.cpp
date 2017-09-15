@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "matrice.h"
-#include "tab_math.h"
+#include "maths.h"
 
 using namespace std;
 
